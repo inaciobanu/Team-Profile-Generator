@@ -96,7 +96,7 @@ node index.js
 
 ## Review
 
-* A sample HTML file generated using your application is [here](//Output/team.html).
+* A sample HTML file generated using your application is [here](https://inaciobanu.github.io/Team-Profile-Generator/) and in the Output folder.
 
 * The URL of the GitHub repository, with a unique name and a readme describing the project is [here](https://github.com/inaciobanu/Team-Profile-Generator).
 
