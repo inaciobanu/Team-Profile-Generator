@@ -66,9 +66,7 @@ As a manager a user want to generate a webpage that displays my team's basic inf
 
 The following image shows a mock-up of the generated HTML’s appearance and functionality:
 
-![HTML webpage titled “My Team” features five boxes listing employee names, titles, and other key info.](/assets/14-object-oriented-programming-challenge-demo.png)
-
-The styling in the image is just an example, so feel free to add your own.
+![HTML webpage titled “My Team” features five boxes listing employee names, titles, and other key info.](/assets/Ina's%20team.jpg)
 
 ---
 
@@ -98,9 +96,9 @@ node index.js
 
 ## Review
 
-* A sample HTML file generated using your application.
+* A sample HTML file generated using your application is [here](//Output/team.html).
 
-* The URL of the GitHub repository, with a unique name and a readme describing the project.
+* The URL of the GitHub repository, with a unique name and a readme describing the project is [here](https://github.com/inaciobanu/Team-Profile-Generator).
 
 ---
 © 2023 edX Boot Camps LLC. Confidential and Proprietary. All Rights Reserved.

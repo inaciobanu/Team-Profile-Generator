@@ -13,69 +13,133 @@ const render = require("./src/page-template.js");
 
 // TODO: Write Code to gather information about the development team members, and render the HTML file.
 
-// TODO: Write code to define and export the Employee class
-class Employee {
-    constructor(name, id, email) { // or whatever parameters are required
-        this.name = name;
-        this.id = id;
-        this.email = email;
-    }
-}
-
-module.exports = Employee;
-
-// TODO: Write code to define and export the Engineer class.  HINT: This class should inherit from Employee.
-const Employee = require("./Employee");
-
-class Engineer extends Employee {
-    constructor(name, id, email, github) { // and whatever else is necessary
-        super(name, id, email);
-        this.github = github;
-    }
-}
-
-module.exports = Engineer;
-
+const promptForManager = () => {
 // Manager Questions
-inquirer.prompt([{
-    //manager questions
-}]).then(response => {
-    // populate manager info
-    // promptForNexEmployee ()
+inquirer.prompt([
+    {
+        type: 'input',
+        message: 'Manager name: ',
+        name: 'name'
+    },
+    {
+        type: 'input',
+        message: 'Manager ID: ',
+        name: 'id'
+    },
+    {
+        type: 'input',
+        message: 'Manager email: ',
+        name: 'email'
+    },
+    {
+        type: 'input',
+        message: 'Manager office no.: ',
+        name: 'officeNumber'
+    }
+]).then(response => {
+    const manager = new Manager(response.name, response.id, response.email, response.officeNumber);
+    myArrayOfTeamMembers.push(manager);
+    promptForNextEmployee();
 })
+}
 
 const promptForNextEmployee = () => {
     inquirer.prompt([{
-        // choice of 3
+        type: 'input',
+        message: 'Choose employee type (enginner, intern or finish): ',
+        name: 'employee'
     }]).then(response => {
-        // if engineer
-        //    promptForEngineer
-        // else if intern
-        //    promptForIntern
-        // else
-        //    use the functionality from page-template to generate the team
+        if (response.employee === 'engineer') {
+            //    promptForEngineer
+            promptForEngineer();
+        }
+        else if (response.employee === 'intern') {
+            promptForIntern();
+        }
+        else {
+            console.log(myArrayOfTeamMembers);
+            let output = render(myArrayOfTeamMembers);
+            writeToFile(outputPath, output);
+        }
     })
 }
 // Questions for Engineer
 const promptForEngineer = () => {
-    inquirer.prompt([{
-        //engineer questions
-    }]).then(response => {
-        // add new engineer to employees array
-        // promptForNextEmployee
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'Engineer name: ',
+            name: 'name'
+        },
+        {
+            type: 'input',
+            message: 'Engineer ID: ',
+            name: 'id'
+        },
+        {
+            type: 'input',
+            message: 'Engineer email: ',
+            name: 'email'
+        },
+        {
+            type: 'input',
+            message: 'Engineer Github: ',
+            name: 'github'
+        }
+    ]).then(response => {
+        const engineer = new Engineer(response.name, response.id, response.email, response.github);
+        myArrayOfTeamMembers.push(engineer);
+        promptForNextEmployee();
     })
 }
 
 //Questions for intern
 const promptForIntern = () => {
-    inquirer.prompt([{
-        //intern questions
-    }]).then(response => {
-        // add new intern to employees array
-        // promptForNextEmployee
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'Intern name: ',
+            name: 'name'
+        },
+        {
+            type: 'input',
+            message: 'Intern ID: ',
+            name: 'id'
+        },
+        {
+            type: 'input',
+            message: 'Intern email: ',
+            name: 'email'
+        },
+        {
+            type: 'input',
+            message: 'Intern school: ',
+            name: 'school'
+        }
+    ]).then(response => {
+        const intern = new Intern(response.name, response.id, response.email, response.school);
+        myArrayOfTeamMembers.push(intern);
+        //console.log(myArrayOfTeamMembers);
+        promptForNextEmployee();
     })
 }
 
 const buildPage = () => {
-// render(myArrayOfTeamMembers)
+    promptForManager();
+    //Question for whoever reads this: WHY IS THE ARRAY EMPTy HERE? it was not empty in the other fucntions...
+
 }
+
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, err => {
+        if (err) {
+          console.error(err);
+        }
+        // file written successfully
+      });
+}
+let myArrayOfTeamMembers = [];
+function init() {
+    buildPage();
+}
+init();
